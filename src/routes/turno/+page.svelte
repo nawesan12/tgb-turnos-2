@@ -37,7 +37,7 @@
 
 <style>
 	.turno-page {
-		margin-block: 10vh 0;
+		margin-block: 2vh 0;
 		display: flex;
 		flex-direction: column;
 	}
