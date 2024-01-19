@@ -1,5 +1,5 @@
 export async function tryToRegister(userData, callback) {
-	const res = await fetch(`https://turnos.gorositostudio.com/api/clients/register`, {
+	const res = await fetch(`/api/clients/register`, {
 		method: 'POST',
 		body: JSON.stringify({
 			name: userData.name,
@@ -25,7 +25,7 @@ export async function tryToRegister(userData, callback) {
 }
 
 export async function tryToLogin(userData, callback) {
-	const res = await fetch('https://turnos.gorositostudio.com/api/clients/login', {
+	const res = await fetch('/api/clients/login', {
 		method: 'POST',
 		body: JSON.stringify({
 			email: userData.email,

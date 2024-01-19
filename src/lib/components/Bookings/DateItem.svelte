@@ -39,7 +39,7 @@
 	const fixedDateForProduction = formatDateWithLeadingZeros();
 
 	const getTimesForTurnos = async () => {
-		const response = await fetch(`http://localhost:5173/api/check-available-times`, {
+		const response = await fetch(`/api/check-available-times`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

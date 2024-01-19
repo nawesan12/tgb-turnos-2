@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { compare } from 'bcrypt';
 import { json } from '@sveltejs/kit';
+import { services } from '../../../utils/services';
 
 const prisma = new PrismaClient();
 
@@ -22,25 +23,35 @@ export async function POST({ request }) {
 		}
 	});
 
-	if (!user)
-		return new Response(
-			JSON.stringify({ success: false, message: 'No se ha podido obtener el usuario' }),
-			{ status: 400 }
-		);
+	const userBookings = await prisma.booking.findMany({
+		where: {
+			userId: user.id
+		}
+	});
+
+	const userBookingsWithServiceNames = userBookings.map((booking) => {
+		return {
+			...booking,
+			service: services[booking.serviceId - 1]
+		};
+	});
+
+	if (!user) return;
+	json({ success: false, message: 'No se ha podido obtener el usuario' });
 
 	if (!user.password)
-		return new Response(
-			JSON.stringify({ success: false, message: 'No se ha podido obtener la contraseña' }),
-			{ status: 400 }
-		);
+		return json({ success: false, message: 'No se ha podido obtener la contraseña' });
 
 	const isPasswordCorrect = await compare(password, user.password);
 
-	if (!isPasswordCorrect)
-		return new Response(
-			JSON.stringify({ success: false, message: 'La contraseña es incorrecta' }),
-			{ status: 400 }
-		);
+	if (!isPasswordCorrect) return json({ success: false, message: 'La contraseña es incorrecta' });
 
-	return json({ user });
+	const userWithBookings = {
+		...user,
+		bookings: [...userBookingsWithServiceNames]
+	};
+
+	console.log(userWithBookings);
+
+	return json({ user: userWithBookings });
 }

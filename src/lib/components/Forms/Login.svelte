@@ -4,8 +4,8 @@
 	let email;
 	let password;
 
-	const handleForm = async () => {
-		const res = await fetch('http://localhost:5173/api/login', {
+	async function handleForm() {
+		const res = await fetch('/api/login', {
 			method: 'POST',
 			body: JSON.stringify({
 				email,
@@ -24,9 +24,9 @@
 
 		userContext.update(() => data.user);
 		localStorage.setItem('user', JSON.stringify(data.user));
-		goto('/turno');
+		goto('/menu');
 		return;
-	};
+	}
 </script>
 
 <section class="login-form">
@@ -58,7 +58,7 @@
 			<a href="/register" class="text-amber-500">Registrate</a>{' '}
 		</span>
 
-		<input type="submit" on:click={handleForm} value="Ingresar" />
+		<button on:click={handleForm}>Iniciar sesion</button>
 	</form>
 </section>
 
@@ -101,7 +101,7 @@
 		border-bottom: 3px solid var(--orange);
 	}
 
-	form input[type='submit'] {
+	button {
 		width: 100%;
 		padding: 1rem;
 		background: var(--primary);

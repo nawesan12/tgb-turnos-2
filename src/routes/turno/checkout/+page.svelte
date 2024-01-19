@@ -1,12 +1,16 @@
 <script>
 	import ConfirmBooking from '$lib/components/Checkout/ConfirmBooking.svelte';
 	import GoBack from '$lib/components/GoBack.svelte';
-	import { bookingContext } from '../../../store/store';
+	import { bookingContext, userContext } from '../../../store/store';
 
 	let bookingData;
-	let userData = {};
+	let userData;
 	const unsubscribe = bookingContext.subscribe((value) => {
 		bookingData = value;
+	});
+
+	const unsubscribeUser = userContext.subscribe((value) => {
+		userData = value;
 	});
 </script>
 
@@ -18,9 +22,9 @@
 		<div class="">
 			<h3 class="text-xl font-bold">Tus datos</h3>
 			<section class="p-3">
-				<p><b>Nombre:</b> {'name'}</p>
-				<p><b>Email:</b> {'email'}</p>
-				<p><b>Numero:</b> {'phone'}</p>
+				<p><b>Nombre:</b> {userData.name}</p>
+				<p><b>Email:</b> {userData.email}</p>
+				<p><b>Numero:</b> {userData.phone}</p>
 			</section>
 		</div>
 
@@ -32,12 +36,14 @@
 			</section>
 		</div>
 
-		<!-- {description ? (<div class="">
-            <h3 class="text-xl font-bold">Especificaciones</h3>
-            <section class="p-3">
-              <p>{description}</p>
-            </section>
-          </div>) : null} -->
+		{#if bookingData.description}
+			<div class="">
+				<h3 class="text-xl font-bold">Especificaciones</h3>
+				<section class="p-3">
+					<p>{bookingData.description}</p>
+				</section>
+			</div>
+		{/if}
 
 		<div class="">
 			<h3 class="text-xl font-bold">Que te vas a hacer?</h3>

@@ -1,11 +1,9 @@
-<script lang="js">
+<script>
 	import Login from '$lib/components/Forms/Login.svelte';
 	import GoBack from '$lib/components/GoBack.svelte';
 
 	if (typeof window !== 'undefined') {
-		const user = JSON.parse(localStorage.getItem('user'));
-		if (user?.email) {
-		}
+		const userFromStorage = localStorage.getItem('user');
 	}
 </script>
 

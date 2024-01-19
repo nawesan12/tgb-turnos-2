@@ -1,4 +1,5 @@
 <script>
+	import { goto } from '$app/navigation';
 	import { send } from '@emailjs/browser';
 
 	export let dataToSend;
@@ -6,7 +7,7 @@
 	console.log(dataToSend);
 
 	const sendTurnoAndCheckout = async () => {
-		const response = await fetch(`https://turnos.gorositostudio.com/api/booking/book`, {
+		const response = await fetch(`/api/confirm-booking`, {
 			method: 'POST',
 			body: JSON.stringify(dataToSend),
 			headers: {
@@ -36,7 +37,31 @@
 				alert('Tuvimos un problema enviandote el mail, pero tu turno ha sido confirmado!');
 			}
 
-			// router.push('/checkout/success');
+			goto('/checkout/confirmado');
 		}
 	};
 </script>
+
+<button on:click={sendTurnoAndCheckout}>Confirmar Turno</button>
+
+<style>
+	button {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: min(90vw, 200px);
+		background: var(--secondary);
+		color: var(--primary);
+		font-size: 1.1rem;
+		font-weight: bold;
+		padding: 0.5rem;
+		border-radius: 0.5rem;
+		margin: 5vh auto;
+		border-right: 3px solid #ff6f20;
+		border-left: 3px solid #ff6f20;
+	}
+
+	button:hover {
+		box-shadow: 0 0 0.1rem 0.1rem var(--orange);
+	}
+</style>

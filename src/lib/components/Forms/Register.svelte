@@ -1,13 +1,61 @@
-<section class="login-form">
-	<form method="POST" action="">
+<script>
+	import { goto } from '$app/navigation';
+
+	let name;
+	let email;
+	let phone;
+	let password;
+
+	async function handleForm() {
+		const tryToRegister = await fetch(`/api/clients/register`, {
+			method: 'POST',
+			body: JSON.stringify({
+				name,
+				email,
+				phone,
+				password
+			}),
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+		const data = await tryToRegister.json();
+
+		if (data.success === false) {
+			alert('Usuario o contraseña incorrectos');
+			return;
+		}
+
+		//setUser(data);
+		localStorage.setItem('user', JSON.stringify(data));
+
+		goto('/login');
+		return;
+	}
+</script>
+
+<section class="register-form">
+	<form>
 		<div class="name flex flex-col gap-2">
 			<label for="name" class="text-xl"> Nombre: </label>
-			<input class="text-md rounded-md p-2" type="text" placeholder="Nombre" required />
+			<input
+				class="text-md rounded-md p-2"
+				type="text"
+				bind:value={name}
+				placeholder="Nombre"
+				required
+			/>
 		</div>
 
 		<div class="email flex flex-col gap-2">
 			<label for="email" class="text-xl"> Email: </label>
-			<input class="text-md rounded-md p-2" type="email" placeholder="Email" required />
+			<input
+				class="text-md rounded-md p-2"
+				type="email"
+				bind:value={email}
+				placeholder="Email"
+				required
+			/>
 		</div>
 
 		<div class="email flex flex-col gap-2">
@@ -15,6 +63,7 @@
 			<input
 				class="text-md rounded-md p-2"
 				type="text"
+				bind:value={phone}
 				inputMode="numeric"
 				placeholder="Telefono"
 				required
@@ -26,6 +75,7 @@
 			<input
 				class="text-md rounded-md p-2"
 				type="password"
+				bind:value={password}
 				inputMode="text"
 				placeholder="Contraseña"
 				required
@@ -36,12 +86,12 @@
 			</span>
 		</div>
 
-		<input type="submit" value="Registrarme" />
+		<button on:click={handleForm}>Registrarme</button>
 	</form>
 </section>
 
 <style>
-	.login-form {
+	.register-form {
 		width: min(90vw, 600px);
 		height: auto;
 		margin-inline: auto;
@@ -75,7 +125,7 @@
 		border-bottom: 3px solid var(--orange);
 	}
 
-	form input[type='submit'] {
+	button {
 		width: 100%;
 		padding: 1rem;
 		background: var(--primary);
