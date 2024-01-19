@@ -12,7 +12,7 @@
 	let anteriorTurno;
 
 	if (user) {
-		const index = user?.bookings.length - 1;
+		const index = user?.bookings?.length - 1;
 		turnoMasProximo = user?.bookings[index];
 		anteriorTurno = user?.bookings[index - 1];
 	}

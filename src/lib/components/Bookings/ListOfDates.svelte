@@ -25,8 +25,7 @@
 </script>
 
 <section class="">
-	<h2 class="p-4 text-2xl font-semibold">Elegi un dia</h2>
-	<h3 class="p-4 px-8 text-2xl font-semibold text-white block">{actualMonthName}</h3>
+	<h2 class="p-4 text-2xl font-semibold my-4">Elegi un dia de {actualMonthName}</h2>
 	<ul>
 		{#each monthDatesSinceToday as date}
 			<DateItem {date} />

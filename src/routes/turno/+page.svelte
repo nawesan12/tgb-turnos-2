@@ -1,12 +1,18 @@
 <script>
 	import ListOfDates from '$lib/components/Bookings/ListOfDates.svelte';
 	import GoBack from '$lib/components/GoBack.svelte';
+	import { userContext } from '../../store/store';
+
+	let user;
+	const unsubscribe = userContext.subscribe((value) => {
+		user = value;
+	});
 </script>
 
 <GoBack />
 <section class="turno-page">
-	<h2 class="px-4 text-2xl font-semibold">Hola, Nawe!</h2>
-	<h1 class="text-center text-2xl font-bold">Agenda tu turno</h1>
+	<h2 class="px-4 text-2xl font-semibold">Hola, {user.name}</h2>
+	<h1 class="text-center text-2xl font-bold mt-8">Agenda tu turno</h1>
 
 	<ListOfDates />
 </section>

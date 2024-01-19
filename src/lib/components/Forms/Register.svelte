@@ -1,5 +1,6 @@
 <script>
 	import { goto } from '$app/navigation';
+	import { userContext } from '../../../store/store';
 
 	let name;
 	let email;
@@ -26,7 +27,7 @@
 			return;
 		}
 
-		//setUser(data);
+		userContext.update((e) => data);
 		localStorage.setItem('user', JSON.stringify(data));
 
 		goto('/login');
