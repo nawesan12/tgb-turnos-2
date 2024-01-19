@@ -1,13 +1,56 @@
+<script>
+	import { goto } from '$app/navigation';
+	import { userContext } from '../../../store/store';
+	let email;
+	let password;
+
+	const handleForm = async () => {
+		const res = await fetch('http://localhost:5173/api/login', {
+			method: 'POST',
+			body: JSON.stringify({
+				email,
+				password
+			}),
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+		const data = await res.json();
+
+		if (data.success === false) {
+			alert('Usuario o contraseña incorrectos');
+			return;
+		}
+
+		userContext.update(() => data.user);
+		localStorage.setItem('user', JSON.stringify(data.user));
+		goto('/turno');
+		return;
+	};
+</script>
+
 <section class="login-form">
-	<form method="POST" action="">
+	<form>
 		<div class="name flex flex-col gap-2">
 			<label for="name" class="text-xl"> Email: </label>
-			<input class="text-md rounded-md p-2" type="email" placeholder="Email" required />
+			<input
+				class="text-md rounded-md p-2"
+				type="email"
+				bind:value={email}
+				placeholder="Email"
+				required
+			/>
 		</div>
 
 		<div class="email flex flex-col gap-2">
 			<label for="email" class="text-xl"> Contraseña: </label>
-			<input class="text-md rounded-md p-2" type="password" placeholder="Contraseña" required />
+			<input
+				class="text-md rounded-md p-2"
+				type="password"
+				bind:value={password}
+				placeholder="Contraseña"
+				required
+			/>
 		</div>
 
 		<span class="block text-center font-medium">
@@ -15,7 +58,7 @@
 			<a href="/register" class="text-amber-500">Registrate</a>{' '}
 		</span>
 
-		<input type="submit" value="Ingresar" />
+		<input type="submit" on:click={handleForm} value="Ingresar" />
 	</form>
 </section>
 
@@ -35,6 +78,10 @@
 		gap: 2rem;
 	}
 
+	input {
+		color: black;
+	}
+
 	.name,
 	.email {
 		width: 100%;
@@ -42,15 +89,15 @@
 		flex-direction: column;
 	}
 
-	form input[type='text'],
-	form input[type='email'] {
+	form input[type='email'],
+	form input[type='password'] {
 		border: none;
 		outline: none;
 		border-bottom: 3px solid black;
 	}
 
-	form input[type='text']:focus,
-	form input[type='email']:focus {
+	form input[type='email']:focus,
+	form input[type='password']:focus {
 		border-bottom: 3px solid var(--orange);
 	}
 

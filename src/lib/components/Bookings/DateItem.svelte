@@ -1,7 +1,8 @@
 <script>
+	import { goto } from '$app/navigation';
+	import { bookingContext } from '../../../store/store';
+
 	export let date;
-	export let selected;
-	export let set;
 
 	const day = parseInt(date.day);
 	const month = parseInt(date.month);
@@ -13,11 +14,47 @@
 		return `${dateWithLeadingZeros}/${monthWithLeadingZeros}/${year}`;
 	};
 
+	let bookingData;
+
+	const unsubscribe = bookingContext.subscribe((value) => {
+		bookingData = value;
+	});
+
+	function saveDateLocally(availableTimes) {
+		bookingContext.update((booking) => {
+			return { ...booking, date: date.day, month: date.month, availableTimes: [...availableTimes] };
+		});
+		localStorage.setItem(
+			'turno',
+			JSON.stringify({
+				...bookingData,
+				date: date.day,
+				year: new Date().getFullYear(),
+				month: date.month,
+				availableTimes: [...availableTimes]
+			})
+		);
+	}
+
 	const fixedDateForProduction = formatDateWithLeadingZeros();
 
+	const getTimesForTurnos = async () => {
+		const response = await fetch(`http://localhost:5173/api/check-available-times`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ date: fixedDateForProduction })
+		});
+		const data = await response.json();
+
+		saveDateLocally(data.times);
+
+		goto('/turno/horario');
+	};
+
 	const handleSetDate = () => {
-		set(date.day);
-		//getTimesForTurnos(date);
+		getTimesForTurnos();
 	};
 
 	const initials = ['D', 'L', 'M', 'X', 'J', 'V', 'S'];
@@ -27,7 +64,6 @@
 
 <button
 	class={`
-        ${selected ? 'selected' : ''}  
         ${
 					day % 3 === 0
 						? 'slide-in-blurred-tr'
