@@ -1,9 +1,7 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../../../database/client.js';
 import { compare } from 'bcrypt';
 import { json } from '@sveltejs/kit';
 import { services } from '../../../utils/services';
-
-const prisma = new PrismaClient();
 
 export async function POST({ request }) {
 	const { email, password } = await request.json();

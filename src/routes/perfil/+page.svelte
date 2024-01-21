@@ -53,7 +53,7 @@
 
 				<div class="sm:flex sm:items-end sm:justify-end">
 					<a
-						href="https://api.whatsapp.com/send?phone=2235929292&text=Hola%20amigo,%20te%20aviso%20que%20voy%20a%20tener%20que%20cancelar%20el%20turno%20de"
+						href={`https://api.whatsapp.com/send?phone=2235929292&text=Hola%20amigo,$20soy%20${user.name},%20te%20aviso%20que%20voy%20a%20tener%20que%20cancelar%20el%20turno%20del${turnoMasProximo.date}%20a%20las${turnoMasProximo.time}`}
 						class="inline-block px-5 py-3 text-right text-xs font-bold uppercase text-gray-900 transition hover:bg-yellow-400"
 					>
 						Cancelar

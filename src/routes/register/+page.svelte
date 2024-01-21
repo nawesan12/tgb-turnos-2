@@ -9,6 +9,6 @@
 <GoBack />
 
 <section class="flex flex-col items-center justify-center gap-11 h-screen">
-	<img src="/favicon.png" alt="Gorosito Studio | Turnos" />
+	<img src="/logo.png" alt="Gorosito Studio | Turnos" />
 	<Register />
 </section>

@@ -3,7 +3,7 @@
 	<p class="text-2xl">Tu turno fue reservado con éxito</p>
 	<span class="underline">Te enviamos un mail con los detalles</span>
 
-	<img src="/favicon.png" alt="TGB Turnos" width={250} height={250} />
+	<img src="/logo.png" alt="TGB Turnos" width={250} height={250} />
 </section>
 
 <style>

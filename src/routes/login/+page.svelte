@@ -1,10 +1,21 @@
 <script>
+	import { goto } from '$app/navigation';
 	import Login from '$lib/components/Forms/Login.svelte';
 	import GoBack from '$lib/components/GoBack.svelte';
+	import { onMount } from 'svelte';
+	import { userContext } from '../../store/store';
 
-	if (typeof window !== 'undefined') {
-		const userFromStorage = localStorage.getItem('user');
-	}
+	onMount(() => {
+		if (typeof window !== 'undefined') {
+			const user = JSON.parse(localStorage.getItem('user'));
+			if (user?.email) {
+				userContext.set(user);
+				goto('/turno');
+			}
+
+			return;
+		}
+	});
 </script>
 
 <svelte:head>
@@ -13,7 +24,7 @@
 <GoBack />
 
 <section class="login-page">
-	<img src="/favicon.png" alt="Gorosito Studio | Turnos" />
+	<img src="/logo.png" alt="Gorosito Studio | Turnos" />
 	<Login />
 </section>
 

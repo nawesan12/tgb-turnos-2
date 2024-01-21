@@ -33,16 +33,17 @@
 	on:click={selectService}
 	class="flex flex-col items-center justify-between gap-5 roll-in-blurred-bottom"
 >
-	<div class={`content flex flex-col items-center`}>
+	<div class="content flex flex-col items-center gap-4">
+		<h3 class="text-2xl font-bold">{name}</h3>
 		<img src={image} alt="" />
 		<p class="text-2xl font-bold">${price}</p>
 	</div>
-	<h3 class="text-2xl font-bold">{name}</h3>
 </button>
 
 <style>
 	button {
 		color: black;
+		width: 100%;
 	}
 
 	div {
@@ -57,16 +58,10 @@
 	}
 
 	button p {
-		opacity: 0.85;
+		opacity: 0.8;
 	}
 
 	button h3 {
 		text-align: center;
-	}
-
-	.selected {
-		border: 4px solid var(--orange);
-		box-shadow: 0 0 1rem var(--orange);
-		transform: scale(1.1);
 	}
 </style>

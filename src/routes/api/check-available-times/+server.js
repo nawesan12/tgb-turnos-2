@@ -1,8 +1,6 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../../../database/client.js';
 import { generateAvailableTimesAndDateFromDB } from '../../../utils/bookings.js';
 import { json } from '@sveltejs/kit';
-
-const prisma = new PrismaClient();
 
 export async function POST({ request }) {
 	const { date } = await request.json();
