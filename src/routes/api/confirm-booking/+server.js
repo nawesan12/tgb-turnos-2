@@ -1,5 +1,7 @@
-import { prisma } from '../../../database/client.js';
+import { PrismaClient } from '@prisma/client';
 import { json } from '@sveltejs/kit';
+
+const prisma = new PrismaClient();
 
 export async function POST({ request }) {
 	const { userId, serviceId, paymentMethod, price, time, date, month, year, description } =
