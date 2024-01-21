@@ -44,7 +44,7 @@
 				alert('Tuvimos un problema enviandote el mail, pero tu turno ha sido confirmado!');
 			}
 
-			goto('/checkout/confirmado');
+			goto('/perfil');
 		}
 	};
 </script>
