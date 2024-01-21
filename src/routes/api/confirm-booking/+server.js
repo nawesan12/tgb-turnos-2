@@ -76,5 +76,5 @@ export async function POST({ request }) {
 
 	await addTurnoToUser();
 
-	return json({ success: true, message: 'Reserva creada con éxito' });
+	return json({ success: true, message: 'Reserva creada con éxito', savedBooking });
 }

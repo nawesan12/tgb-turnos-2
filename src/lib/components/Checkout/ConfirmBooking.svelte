@@ -1,6 +1,7 @@
 <script>
 	import { goto } from '$app/navigation';
 	import { send } from '@emailjs/browser';
+	import { userContext } from '../../../store/store';
 
 	export let dataToSend;
 
@@ -21,6 +22,12 @@
 		}
 
 		// setTurno({ ...turno, booked: data.savedBooking });
+		userContext.update((user) => {
+			return {
+				...user,
+				bookings: [...user.bookings, data.savedBooking]
+			};
+		});
 
 		if (data.success === true) {
 			const mail = {
