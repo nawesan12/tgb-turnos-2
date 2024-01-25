@@ -29,6 +29,8 @@
 			};
 		});
 
+alert("Turno confirmado!")
+
 		if (data.success === true) {
 			const mail = {
 				to_name: dataToSend.name,
