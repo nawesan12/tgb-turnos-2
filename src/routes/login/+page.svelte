@@ -10,7 +10,7 @@
 			const user = JSON.parse(localStorage.getItem('user'));
 			if (user?.email) {
 				userContext.set(user);
-				goto('/turno');
+				goto('/menu');
 			}
 
 			return;
