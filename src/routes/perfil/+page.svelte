@@ -146,7 +146,7 @@
 
 <h2 class="text-xl mx-4">Queres otro turno mas?</h2>
 <a class="text-orange-600 mx-4 text-xl inline-flex items-center gap-2" href="/turno"
-	>Agendate <svg
+	>Agendar <svg
 		width="24"
 		height="24"
 		viewBox="0 0 24 24"
