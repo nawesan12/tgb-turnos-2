@@ -1,4 +1,5 @@
 <script>
+	//@ts-nocheck
 	import { goto } from '$app/navigation';
 	import { send } from '@emailjs/browser';
 	import { userContext } from '../../../store/store';
@@ -29,23 +30,18 @@
 			};
 		});
 
-		if (data.success === true) {
-			const mail = {
-				to_name: dataToSend.name,
-				clientEmail: dataToSend.email,
-				service: dataToSend.service,
-				date: String(dataToSend.date + '/' + dataToSend.month + '/' + dataToSend.year),
-				time: dataToSend.time
-			};
+		const mail = {
+			to_name: dataToSend.name,
+			clientEmail: dataToSend.email,
+			service: dataToSend.service,
+			date: String(dataToSend.date + '/' + dataToSend.month + '/' + dataToSend.year),
+			time: dataToSend.time
+		};
 
-			try {
-				send('service_kwpevqy', 'template_qhx76f9', mail, '2ucjbq62dBKzsL0bK');
-			} catch (error) {
-				alert('Tuvimos un problema enviandote el mail, pero tu turno ha sido confirmado!');
-			}
+		send('service_kwpevqy', 'template_qhx76f9', mail, '2ucjbq62dBKzsL0bK');
 
-			goto('/checkout/confirmado');
-		}
+		alert('Turno confirmado!');
+		goto('/perfil');
 	};
 </script>
 
