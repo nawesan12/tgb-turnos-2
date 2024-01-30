@@ -1,8 +1,9 @@
 <script>
-	import { generateActualMonthDates } from '../../../utils/dates';
+	import { generateActualMonthDates, generateNextMonthDates } from '../../../utils/dates';
 	import DateItem from './DateItem.svelte';
 
 	const actualMonthDates = generateActualMonthDates();
+	const nextMonthDates = generateNextMonthDates();
 
 	const monthDatesSinceToday = actualMonthDates.filter((date) => date.day >= new Date().getDate());
 
@@ -21,7 +22,10 @@
 		'Diciembre'
 	];
 
+	const actualDay = new Date().getDate();
+
 	const actualMonthName = months[actualMonthDates[0].month - 1];
+	const nextMonthName = months[nextMonthDates[0].month - 1];
 </script>
 
 <section class="">
@@ -31,6 +35,14 @@
 			<DateItem {date} />
 		{/each}
 	</ul>
+	{#if actualDay > 24}
+		<h2 class="p-4 text-2xl font-semibold my-4">O de {nextMonthName}</h2>
+		<ul>
+			{#each nextMonthDates as date}
+				<DateItem {date} />
+			{/each}
+		</ul>
+	{/if}
 </section>
 
 <style>
