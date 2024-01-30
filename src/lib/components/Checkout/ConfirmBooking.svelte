@@ -1,11 +1,8 @@
 <script>
 	import { goto } from '$app/navigation';
 	import { send } from '@emailjs/browser';
-	import { userContext } from '../../../store/store';
 
 	export let dataToSend;
-
-	console.log(dataToSend);
 
 	const sendTurnoAndCheckout = async () => {
 		const response = await fetch(`/api/confirm-booking`, {
