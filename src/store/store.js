@@ -15,6 +15,8 @@ const initialBooking = {
 
 export const bookingContext = writable(initialBooking);
 
-const initialUser = {};
+const initialUser = {
+	bookings: []
+};
 
 export const userContext = writable(initialUser);
