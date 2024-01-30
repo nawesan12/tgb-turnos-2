@@ -33,14 +33,7 @@
 
 		send('service_kwpevqy', 'template_qhx76f9', mail, '2ucjbq62dBKzsL0bK');
 
-		userContext.update((user) => {
-			return {
-				...user,
-				bookings: [...user.bookings, data.savedBooking]
-			};
-		});
-
-		goto('/perfil');
+		goto('/login');
 	};
 </script>
 
