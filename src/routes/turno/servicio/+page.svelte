@@ -6,14 +6,13 @@
 	export let data;
 </script>
 
-<TokenAssurance>
-	<GoBack />
-	<section class="service-page mx-auto">
-		<h2 class="mb-8 text-3xl font-bold">Que te vas a hacer?</h2>
+<TokenAssurance />
+<GoBack />
+<section class="service-page mx-auto">
+	<h2 class="mb-8 text-3xl font-bold">Que te vas a hacer?</h2>
 
-		<ListOfServicesItems services={data.services} />
-	</section>
-</TokenAssurance>
+	<ListOfServicesItems services={data.services} />
+</section>
 
 <style>
 	.service-page {
