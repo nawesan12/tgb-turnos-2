@@ -1,16 +1,19 @@
 <script>
 	import GoBack from '$lib/components/GoBack.svelte';
 	import ListOfServicesItems from '$lib/components/Services/ListOfServicesItems.svelte';
+	import TokenAssurance from '$lib/components/TokenAssurance/token-assurance.svelte';
 
 	export let data;
 </script>
 
-<GoBack />
-<section class="service-page mx-auto">
-	<h2 class="mb-8 text-3xl font-bold">Que te vas a hacer?</h2>
+<TokenAssurance>
+	<GoBack />
+	<section class="service-page mx-auto">
+		<h2 class="mb-8 text-3xl font-bold">Que te vas a hacer?</h2>
 
-	<ListOfServicesItems services={data.services} />
-</section>
+		<ListOfServicesItems services={data.services} />
+	</section>
+</TokenAssurance>
 
 <style>
 	.service-page {

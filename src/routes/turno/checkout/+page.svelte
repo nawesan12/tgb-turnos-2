@@ -1,6 +1,7 @@
 <script>
 	import ConfirmBooking from '$lib/components/Checkout/ConfirmBooking.svelte';
 	import GoBack from '$lib/components/GoBack.svelte';
+	import TokenAssurance from '$lib/components/TokenAssurance/token-assurance.svelte';
 	import { bookingContext, userContext } from '../../../store/store';
 
 	let bookingData;
@@ -14,77 +15,79 @@
 	});
 </script>
 
-<GoBack />
-<section class="checkout-page">
-	<h2 class="font-bold text-3xl text-center mb-5 text-white">Checkout</h2>
+<TokenAssurance>
+	<GoBack />
+	<section class="checkout-page">
+		<h2 class="font-bold text-3xl text-center mb-5 text-white">Checkout</h2>
 
-	<section class="summary p-4 rounded-sm">
-		<div class="">
-			<h3 class="text-xl font-bold">Tus datos</h3>
-			<section class="p-3">
-				<p><b>Nombre:</b> {userData.name}</p>
-				<p><b>Email:</b> {userData.email}</p>
-				<p><b>Numero:</b> {userData.phone}</p>
-			</section>
-		</div>
-
-		<div class="turno">
-			<h3 class="text-xl font-bold">Tu turno</h3>
-			<section class="p-3">
-				<p><b>Fecha:</b> {bookingData.date}/{bookingData.month}/{new Date().getFullYear()}</p>
-				<p><b>Hora:</b> {bookingData.time}</p>
-			</section>
-		</div>
-
-		{#if bookingData.description}
+		<section class="summary p-4 rounded-sm">
 			<div class="">
-				<h3 class="text-xl font-bold">Especificaciones</h3>
+				<h3 class="text-xl font-bold">Tus datos</h3>
 				<section class="p-3">
-					<p>{bookingData.description}</p>
+					<p><b>Nombre:</b> {userData.name}</p>
+					<p><b>Email:</b> {userData.email}</p>
+					<p><b>Numero:</b> {userData.phone}</p>
 				</section>
 			</div>
-		{/if}
 
-		<div class="">
-			<h3 class="text-xl font-bold">Que te vas a hacer?</h3>
-			<section class="p-3">
-				<p class="text-1xl font-semibold">{bookingData.service}</p>
-			</section>
-		</div>
+			<div class="turno">
+				<h3 class="text-xl font-bold">Tu turno</h3>
+				<section class="p-3">
+					<p><b>Fecha:</b> {bookingData.date}/{bookingData.month}/{new Date().getFullYear()}</p>
+					<p><b>Hora:</b> {bookingData.time}</p>
+				</section>
+			</div>
 
-		<div class="total">
+			{#if bookingData.description}
+				<div class="">
+					<h3 class="text-xl font-bold">Especificaciones</h3>
+					<section class="p-3">
+						<p>{bookingData.description}</p>
+					</section>
+				</div>
+			{/if}
+
 			<div class="">
-				<section class="p-3 font-semibold text-2xl">
-					<p>Total:</p>
-					<p>${bookingData.price}</p>
+				<h3 class="text-xl font-bold">Que te vas a hacer?</h3>
+				<section class="p-3">
+					<p class="text-1xl font-semibold">{bookingData.service}</p>
 				</section>
 			</div>
-		</div>
 
-		<p class="when text-sm">Sacaste el turno en: {new Date().toLocaleDateString()}</p>
-	</section>
+			<div class="total">
+				<div class="">
+					<section class="p-3 font-semibold text-2xl">
+						<p>Total:</p>
+						<p>${bookingData.price}</p>
+					</section>
+				</div>
+			</div>
 
-	<!-- <p class="text-center text-xs mt-4 text-white">
+			<p class="when text-sm">Sacaste el turno en: {new Date().toLocaleDateString()}</p>
+		</section>
+
+		<!-- <p class="text-center text-xs mt-4 text-white">
 		* En caso de no asistir al turno sin aviso previo de 1 hora, el dinero no sera devuelto al
 		cliente.
 	</p> -->
-	<ConfirmBooking
-		dataToSend={{
-			email: userData.email,
-			phone: userData.phone,
-			name: userData.name,
-			service: bookingData.service,
-			price: bookingData.price,
-			time: bookingData.time,
-			date: bookingData.date,
-			month: bookingData.month,
-			year: bookingData.year,
-			serviceId: bookingData.serviceId,
-			description: bookingData.description,
-			userId: userData.id
-		}}
-	/>
-</section>
+		<ConfirmBooking
+			dataToSend={{
+				email: userData.email,
+				phone: userData.phone,
+				name: userData.name,
+				service: bookingData.service,
+				price: bookingData.price,
+				time: bookingData.time,
+				date: bookingData.date,
+				month: bookingData.month,
+				year: bookingData.year,
+				serviceId: bookingData.serviceId,
+				description: bookingData.description,
+				userId: userData.id
+			}}
+		/>
+	</section>
+</TokenAssurance>
 
 <style>
 	.checkout-page {

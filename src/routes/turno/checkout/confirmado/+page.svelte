@@ -1,10 +1,16 @@
-<section class="success page h-screen bg-black flex flex-col items-center justify-center gap-4">
-	<h1 class="text-4xl font-bold">Felicidades!</h1>
-	<p class="text-2xl">Tu turno fue reservado con éxito</p>
-	<span class="underline">Te enviamos un mail con los detalles</span>
+<script>
+	import TokenAssurance from '$lib/components/TokenAssurance/token-assurance.svelte';
+</script>
 
-	<img src="/logo.png" alt="TGB Turnos" width={250} height={250} />
-</section>
+<TokenAssurance>
+	<section class="success page h-screen bg-black flex flex-col items-center justify-center gap-4">
+		<h1 class="text-4xl font-bold">Felicidades!</h1>
+		<p class="text-2xl">Tu turno fue reservado con éxito</p>
+		<span class="underline">Te enviamos un mail con los detalles</span>
+
+		<img src="/logo.png" alt="TGB Turnos" width={250} height={250} />
+	</section>
+</TokenAssurance>
 
 <style>
 	@keyframes appear {

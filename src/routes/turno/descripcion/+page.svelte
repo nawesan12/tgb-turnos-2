@@ -1,5 +1,6 @@
 <script>
 	import GoBack from '$lib/components/GoBack.svelte';
+	import TokenAssurance from '$lib/components/TokenAssurance/token-assurance.svelte';
 	import { bookingContext } from '../../../store/store';
 
 	let description;
@@ -12,25 +13,27 @@
 	}
 </script>
 
-<GoBack />
-<section class="description-page flex flex-col items-center gap-6">
-	<h2 class="mb-6 pb-6 text-center text-3xl font-bold">
-		Algo que quieras especificar sobre el corte?
-	</h2>
+<TokenAssurance>
+	<GoBack />
+	<section class="description-page flex flex-col items-center gap-6">
+		<h2 class="mb-6 pb-6 text-center text-3xl font-bold">
+			Algo que quieras especificar sobre el corte?
+		</h2>
 
-	<textarea
-		class="mt-4 shadow-drop-2-center text-black"
-		name="description"
-		id="description"
-		placeholder="Decinos tu preferencia!"
-		cols={30}
-		rows={10}
-		bind:value={description}
-		on:change={updateDescriptionLocally}
-	></textarea>
+		<textarea
+			class="mt-4 shadow-drop-2-center text-black"
+			name="description"
+			id="description"
+			placeholder="Decinos tu preferencia!"
+			cols={30}
+			rows={10}
+			bind:value={description}
+			on:change={updateDescriptionLocally}
+		></textarea>
 
-	<a href="/turno/checkout"> Siguiente </a>
-</section>
+		<a href="/turno/checkout"> Siguiente </a>
+	</section>
+</TokenAssurance>
 
 <style>
 	.description-page {
