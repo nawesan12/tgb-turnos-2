@@ -5,7 +5,7 @@
 
 	onMount(() => {
 		const user = JSON.parse(localStorage.getItem('user'));
-		if (user.email === undefined) {
+		if (user.email !== undefined) {
 			userContext.set({ ...$userContext, user });
 			return;
 		}

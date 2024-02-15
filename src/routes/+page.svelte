@@ -7,7 +7,7 @@
 	</header>
 
 	<section class="flex items-center justify-center flicker-in-1">
-		<img src="/logo.png" alt="" />
+		<img src="/logo.png" class="max-h-72" alt="" />
 	</section>
 
 	<footer class="flex flex-col items-center mt-14 gap-3">
