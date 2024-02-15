@@ -22,6 +22,8 @@
 			return;
 		}
 
+		console.log(data.user);
+
 		userContext.update(() => data.user);
 		localStorage.setItem('user', JSON.stringify(data.user));
 		goto('/menu');

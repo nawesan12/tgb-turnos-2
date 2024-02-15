@@ -13,27 +13,26 @@
 	}
 </script>
 
-<TokenAssurance>
-	<GoBack />
-	<section class="description-page flex flex-col items-center gap-6">
-		<h2 class="mb-6 pb-6 text-center text-3xl font-bold">
-			Algo que quieras especificar sobre el corte?
-		</h2>
+<TokenAssurance />
+<GoBack />
+<section class="description-page flex flex-col items-center gap-6">
+	<h2 class="mb-6 pb-6 text-center text-3xl font-bold">
+		Algo que quieras especificar sobre el corte?
+	</h2>
 
-		<textarea
-			class="mt-4 shadow-drop-2-center text-black"
-			name="description"
-			id="description"
-			placeholder="Decinos tu preferencia!"
-			cols={30}
-			rows={10}
-			bind:value={description}
-			on:change={updateDescriptionLocally}
-		></textarea>
+	<textarea
+		class="mt-4 shadow-drop-2-center text-black"
+		name="description"
+		id="description"
+		placeholder="Decinos tu preferencia!"
+		cols={30}
+		rows={10}
+		bind:value={description}
+		on:change={updateDescriptionLocally}
+	></textarea>
 
-		<a href="/turno/checkout"> Siguiente </a>
-	</section>
-</TokenAssurance>
+	<a href="/turno/checkout"> Siguiente </a>
+</section>
 
 <style>
 	.description-page {

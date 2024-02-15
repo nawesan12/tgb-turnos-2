@@ -5,7 +5,7 @@
 
 	onMount(() => {
 		const user = JSON.parse(localStorage.getItem('user'));
-		if (user.email !== undefined) {
+		if (user.email && user.name) {
 			userContext.set({ ...$userContext, user });
 			return;
 		}
@@ -13,5 +13,3 @@
 		goto('/login');
 	});
 </script>
-
-<slot />
