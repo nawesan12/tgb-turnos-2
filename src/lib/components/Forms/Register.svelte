@@ -35,7 +35,7 @@
 	}
 </script>
 
-<section class="register-form">
+<section class="register-form text-black">
 	<form>
 		<div class="name flex flex-col gap-2">
 			<label for="name" class="text-xl"> Nombre: </label>
