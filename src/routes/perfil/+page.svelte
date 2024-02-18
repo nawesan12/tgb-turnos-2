@@ -10,7 +10,7 @@
 
 	onMount(() => {
 		updateTurnos();
-		user = JSON.parse(localStorage.getItem('user'));
+		user = JSON.parse(localStorage.getItem('user-goro'));
 	});
 
 	function updateTurnos() {

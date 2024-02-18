@@ -28,7 +28,7 @@
 		}
 
 		userContext.update((e) => data);
-		localStorage.setItem('user', JSON.stringify(data));
+		localStorage.setItem('user-goro', JSON.stringify(data));
 
 		goto('/login');
 		return;

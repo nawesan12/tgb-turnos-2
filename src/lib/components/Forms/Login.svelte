@@ -25,7 +25,7 @@
 		console.log(data.user);
 
 		userContext.update(() => data.user);
-		localStorage.setItem('user', JSON.stringify(data.user));
+		localStorage.setItem('user-goro', JSON.stringify(data.user));
 		goto('/menu');
 		return;
 	}

@@ -18,7 +18,7 @@ export async function tryToRegister(userData, callback) {
 		return;
 	}
 
-	localStorage.setItem('user', JSON.stringify(data));
+	localStorage.setItem('user-goro', JSON.stringify(data));
 
 	callback();
 	return;
@@ -42,7 +42,7 @@ export async function tryToLogin(userData, callback) {
 		return;
 	}
 
-	localStorage.setItem('user', JSON.stringify(data.user));
+	localStorage.setItem('user-goro', JSON.stringify(data.user));
 	callback();
 	return;
 }

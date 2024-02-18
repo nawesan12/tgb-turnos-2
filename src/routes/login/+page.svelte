@@ -7,10 +7,10 @@
 
 	onMount(() => {
 		if (typeof window !== 'undefined') {
-			const user = JSON.parse(localStorage.getItem('user'));
+			const user = JSON.parse(localStorage.getItem('user-goro'));
 			if (user?.email) {
 				userContext.set(user);
-				//localStorage.setItem('user', JSON.stringify(user));
+				//localStorage.setItem('user-goro', JSON.stringify(user));
 
 				console.log('usuario en contexto:', $userContext);
 				goto('/menu');

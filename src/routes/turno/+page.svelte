@@ -7,7 +7,7 @@
 	import { goto } from '$app/navigation';
 
 	onMount(() => {
-		const user = localStorage.getItem('user');
+		const user = localStorage.getItem('user-goro');
 
 		if (!user) {
 			goto('/login');
