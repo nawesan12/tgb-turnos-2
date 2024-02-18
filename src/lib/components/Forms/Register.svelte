@@ -1,6 +1,7 @@
 <script>
 	import { goto } from '$app/navigation';
 	import { userContext } from '../../../store/store';
+	import { id } from '../../../utils/auth';
 
 	let name = '';
 	let email = '';
@@ -11,7 +12,7 @@
 		const tryToRegister = await fetch(`/api/register`, {
 			method: 'POST',
 			body: JSON.stringify({
-				clientId: '', //AUTOGENERARID
+				clientId: id(), //AUTOGENERARID
 				name,
 				email,
 				phone,
