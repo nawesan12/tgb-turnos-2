@@ -129,17 +129,4 @@
 	form input[type='email']:focus {
 		border-bottom: 3px solid var(--orange);
 	}
-
-	button {
-		width: 100%;
-		padding: 1rem;
-		background: var(--primary);
-		color: var(--secondary);
-		border: none;
-		outline: none;
-		border-radius: 0.5rem;
-		cursor: pointer;
-		font-size: 1.1rem;
-		font-weight: bold;
-	}
 </style>
