@@ -2,15 +2,16 @@
 	import { goto } from '$app/navigation';
 	import { userContext } from '../../../store/store';
 
-	let name;
-	let email;
-	let phone;
-	let password;
+	let name = '';
+	let email = '';
+	let phone = '';
+	let password = '';
 
 	async function handleForm() {
-		const tryToRegister = await fetch(`/api/clients/register`, {
+		const tryToRegister = await fetch(`/api/register`, {
 			method: 'POST',
 			body: JSON.stringify({
+				clientId: '', //AUTOGENERARID
 				name,
 				email,
 				phone,
@@ -38,7 +39,7 @@
 <section class="register-form text-black">
 	<form>
 		<div class="name flex flex-col gap-2">
-			<label for="name" class="text-xl"> Nombre: </label>
+			<label for="name" class="text-xl text-white"> Nombre: </label>
 			<input
 				class="text-md rounded-md p-2"
 				type="text"
@@ -49,7 +50,7 @@
 		</div>
 
 		<div class="email flex flex-col gap-2">
-			<label for="email" class="text-xl"> Email: </label>
+			<label for="email" class="text-xl text-white"> Email: </label>
 			<input
 				class="text-md rounded-md p-2"
 				type="email"
@@ -60,7 +61,7 @@
 		</div>
 
 		<div class="email flex flex-col gap-2">
-			<label for="number" class="text-xl"> Telefono: </label>
+			<label for="number" class="text-xl text-white"> Telefono: </label>
 			<input
 				class="text-md rounded-md p-2"
 				type="text"
@@ -72,7 +73,7 @@
 		</div>
 
 		<div class="email flex flex-col gap-2">
-			<label for="number" class="text-xl"> Contraseña: </label>
+			<label for="number" class="text-xl text-white"> Contraseña: </label>
 			<input
 				class="text-md rounded-md p-2"
 				type="password"
@@ -87,7 +88,9 @@
 			</span>
 		</div>
 
-		<button on:click={handleForm}>Registrarme</button>
+		<button class="bg-white px-8 py-4 text-black rounded-lg" on:click={handleForm}
+			>Registrarme</button
+		>
 	</form>
 </section>
 
