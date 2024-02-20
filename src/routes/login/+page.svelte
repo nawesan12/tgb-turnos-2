@@ -6,6 +6,8 @@
 	import { userContext } from '../../store/store';
 
 	onMount(() => {
+		alert('Tenes que volver a registrarte!');
+
 		if (typeof window !== 'undefined') {
 			const user = JSON.parse(localStorage.getItem('user-goro'));
 			if (user?.email) {
