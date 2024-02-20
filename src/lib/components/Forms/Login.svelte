@@ -17,16 +17,14 @@
 		});
 		const data = await res.json();
 
-		if (data.success === false) {
-			alert('Usuario o contraseña incorrectos');
+		if (data.user) {
+			userContext.update(() => data.user);
+			localStorage.setItem('user-goro', JSON.stringify(data.user));
+			goto('/menu');
 			return;
 		}
 
-		console.log(data.user);
-
-		userContext.update(() => data.user);
-		localStorage.setItem('user-goro', JSON.stringify(data.user));
-		goto('/menu');
+		alert('Usuario o contraseña incorrectos');
 		return;
 	}
 </script>
