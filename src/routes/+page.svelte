@@ -1,11 +1,3 @@
-<script>
-	import { onMount } from 'svelte';
-
-	onMount(() => {
-		alert('Tenes que volver a registrarte!');
-	});
-</script>
-
 <section class="h-screen grid grid-rows-3">
 	<header class="flex flex-col items-center justify-center">
 		<h1 class="text-4xl font-bold">&#91; Gorosito Studio &#93;</h1>
