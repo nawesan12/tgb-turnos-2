@@ -2,7 +2,6 @@
 	import TokenAssurance from '$lib/components/TokenAssurance/token-assurance.svelte';
 </script>
 
-<TokenAssurance />
 <section class="success page h-screen bg-black flex flex-col items-center justify-center gap-4">
 	<h1 class="text-4xl font-bold">Felicidades!</h1>
 	<p class="text-2xl">Tu turno fue reservado con éxito</p>

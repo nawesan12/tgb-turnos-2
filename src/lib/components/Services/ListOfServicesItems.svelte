@@ -7,13 +7,13 @@
 	const comboServices = services.filter((service) => service.type === 'Combo');
 </script>
 
-<ul>
+<ul class="grid grid-cols-1 gap-8 lg:grid-cols-4 lg:gap-8">
 	{#each normalServices as service}
 		<ServiceItem id={service.id} name={service.name} price={service.price} image={service.image} />
 	{/each}
 </ul>
 <h2 class="text-3xl font-bold my-8">O algun combo?</h2>
-<ul>
+<ul class="grid grid-cols-1 gap-8 lg:grid-cols-4 lg:gap-8 mb-8">
 	{#each comboServices as service}
 		<ServiceItem id={service.id} name={service.name} price={service.price} image={service.image} />
 	{/each}

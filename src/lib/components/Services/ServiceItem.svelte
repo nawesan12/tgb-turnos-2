@@ -29,14 +29,19 @@
 	}
 </script>
 
-<button
-	on:click={selectService}
-	class="flex flex-col items-center justify-between gap-5 roll-in-blurred-bottom"
->
-	<div class="content flex flex-col items-center gap-4">
-		<h3 class="text-2xl font-bold">{name}</h3>
-		<img src={image} alt="" />
-		<p class="text-2xl font-bold">${price}</p>
+<button on:click={selectService} class="h-auto pb-4 rounded-lg bg-gray-200 roll-in-blurred-bottom">
+	<div class="flex gap-8 items-center flex-col">
+		<strong
+			class="rounded border border-orange-600 bg-orange-600 px-3 py-1.5 text-xl font-bold text-white"
+		>
+			{name}
+		</strong>
+		<section class="flex justify-center flex-col w-full">
+			<img src={image} class="h-40" alt="" />
+			<footer>
+				<b class="text-xl">${price}</b>
+			</footer>
+		</section>
 	</div>
 </button>
 
@@ -46,22 +51,7 @@
 		width: 100%;
 	}
 
-	div {
-		padding: 2rem 3rem;
-		border-radius: 1rem;
-		cursor: pointer;
-		background: #fff;
-		color: #000;
-		border-bottom: 4px solid var(--orange);
-		border-top: 4px solid var(--orange);
-		transition: all 0.3s ease;
-	}
-
 	button p {
 		opacity: 0.8;
-	}
-
-	button h3 {
-		text-align: center;
 	}
 </style>

@@ -1,6 +1,9 @@
 <script>
+	import { goto } from '$app/navigation';
 	import GoBack from '$lib/components/GoBack.svelte';
 	import TokenAssurance from '$lib/components/TokenAssurance/token-assurance.svelte';
+	import Button from '$lib/components/ui/button/button.svelte';
+	import Textarea from '$lib/components/ui/textarea/textarea.svelte';
 	import { bookingContext } from '../../../store/store';
 
 	let description;
@@ -13,14 +16,13 @@
 	}
 </script>
 
-<TokenAssurance />
 <GoBack />
-<section class="description-page flex flex-col items-center gap-6">
+<section class="description-page flex p-4 flex-col items-center gap-6">
 	<h2 class="mb-6 pb-6 text-center text-3xl font-bold">
 		Algo que quieras especificar sobre el corte?
 	</h2>
 
-	<textarea
+	<Textarea
 		class="mt-4 shadow-drop-2-center text-black"
 		name="description"
 		id="description"
@@ -29,27 +31,14 @@
 		rows={10}
 		bind:value={description}
 		on:change={updateDescriptionLocally}
-	></textarea>
+	></Textarea>
 
-	<a href="/turno/checkout"> Siguiente </a>
+	<Button href="/turno/checkout" on:click={() => goto('/turno/checkout')}>Siguiente</Button>
 </section>
 
 <style>
 	.description-page {
 		margin-top: 2vh;
-	}
-
-	textarea {
-		width: min(90vw, 800px);
-		border: none;
-		border-radius: 0.5rem;
-		outline: none;
-		padding: 1rem;
-		font-size: 1.1rem;
-		color: black;
-		caret-color: var(--orange);
-		resize: none;
-		margin-top: 4vh;
 	}
 
 	a {

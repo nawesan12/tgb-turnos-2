@@ -1,6 +1,7 @@
 <script>
 	import { goto } from '$app/navigation';
 	import { send } from '@emailjs/browser';
+	import { toast } from 'svelte-sonner';
 
 	export let dataToSend;
 
@@ -15,14 +16,14 @@
 		const data = await response.json();
 
 		if (data.error) {
-			alert('Ha habido un error confirmando el turno.');
+			toast.error('Ha habido un error confirmando el turno.');
 		}
 
-		alert('Turno confirmado!');
+		toast.success('Turno confirmado! Revisa tu email.');
 
 		const mail = {
-			to_name: dataToSend.name,
-			clientEmail: dataToSend.email,
+			to_name: dataToSend.clientName,
+			clientEmail: dataToSend.clientEmail,
 			service: dataToSend.service,
 			date: String(dataToSend.date + '/' + dataToSend.month + '/' + dataToSend.year),
 			time: dataToSend.time
@@ -30,7 +31,7 @@
 
 		send('service_kwpevqy', 'template_qhx76f9', mail, '2ucjbq62dBKzsL0bK');
 
-		goto('/login');
+		goto('/');
 	};
 </script>
 
