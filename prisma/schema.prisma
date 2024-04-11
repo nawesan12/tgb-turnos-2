@@ -7,42 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Achievement {
-  id        Int      @id @default(autoincrement())
-  name      String
-  type      String
-  amount    Float
-  createdAt DateTime @default(now())
-}
-
-model Booking {
-  id            Int      @id @default(autoincrement())
-  date          String
-  time          String
-  year          String?
-  status        String   @default("Pendiente")
-  userId        String
-  description   String?  @default("Sin descripción")
-  serviceId     Int
-  price         Int
-  paymentMethod String
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
-  @@index([userId, serviceId], map: "userId_serviceId")
-}
-
-model Course {
-  id        Int      @id @default(autoincrement())
-  name      String
-  price     Float
-  link      String?  @unique
-  thumbnail String?
-  status    String   @default("Pendiente")
-  createdAt DateTime @default(now())
-  updatedAt DateTime
-}
-
 model HolidayService {
   id    Int    @id @default(autoincrement())
   name  String
@@ -51,44 +15,34 @@ model HolidayService {
   image String @default("/barber.svg")
 }
 
-model Payment {
-  id        Int      @id @default(autoincrement())
-  amount    Float
-  status    String   @default("Pendiente")
-  createdAt DateTime @default(now())
-  updatedAt DateTime
-  userId    String
-
-  @@index([userId], map: "userId")
-}
-
 model Service {
-  id    Int    @id @default(autoincrement())
-  name  String
-  type  String
-  price Int    @default(0)
-  image String @default("/barber.svg")
-}
-
-model TgbCoin {
-  id        Int      @id @default(autoincrement())
-  amount    Float
-  createdAt DateTime @default(now())
-  updatedAt DateTime
-}
-
-model User {
-  id          String  @id
-  clientId    String?
-  name        String
-  email       String  @unique
-  password    String
-  phone       String?
-  totalTurnos Int     @default(0)
-  totalCoins  Int     @default(0)
+  id      Int       @id @default(autoincrement())
+  name    String
+  type    String
+  price   Int       @default(0)
+  image   String    @default("/barber.svg")
+  Booking Booking[]
 }
 
 model Vacations {
   id  Int    @id @default(autoincrement())
   day String
+}
+
+model Booking {
+  id            Int      @id @default(autoincrement())
+  date          String
+  time          String
+  year          String?
+  status        String   @default("Pendiente")
+  description   String?  @default("Sin descripción")
+  serviceId     Int
+  service       Service  @relation(fields: [serviceId], references: [id])
+  price         Int
+  paymentMethod String   @default("Efectivo")
+  clientName    String
+  clientEmail   String
+  clientPhone   String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }

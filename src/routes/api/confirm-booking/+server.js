@@ -4,8 +4,19 @@ import { json } from '@sveltejs/kit';
 const prisma = new PrismaClient();
 
 export async function POST({ request }) {
-	const { userId, serviceId, paymentMethod, price, time, date, month, year, description } =
-		await request.json();
+	const {
+		serviceId,
+		paymentMethod,
+		price,
+		time,
+		date,
+		month,
+		year,
+		description,
+		clientName,
+		clientEmail,
+		clientPhone
+	} = await request.json();
 
 	const formatDateWithLeadingZeros = () => {
 		const dateWithLeadingZeros = date < 10 ? `0${date}` : date;
@@ -13,23 +24,20 @@ export async function POST({ request }) {
 		return `${dateWithLeadingZeros}/${monthWithLeadingZeros}/${year}`;
 	};
 
-	const addTurnoToUser = async () => {
-		const updatedUser = await prisma.user.update({
-			where: { id: String(userId) },
-			data: {
-				totalTurnos: {
-					increment: 1
-				}
-			}
-		});
-
-		if (!updatedUser)
-			return json({ success: false, message: 'No se ha podido actualizar el usuario' });
-	};
-
 	const formattedDate = formatDateWithLeadingZeros();
 
-	const newBooking = { time, userId, serviceId, paymentMethod, price, year, description };
+	const newBooking = {
+		serviceId,
+		paymentMethod,
+		price,
+		time,
+		date,
+		year,
+		description,
+		clientName,
+		clientEmail,
+		clientPhone
+	};
 
 	// check if there's already a booking for the same date and time
 	const existingBooking = await prisma.booking.findFirst({
@@ -57,8 +65,6 @@ export async function POST({ request }) {
 
 		if (!updatedBooking) return json({ success: false });
 
-		await addTurnoToUser();
-
 		return json({ success: true, message: 'Reserva creada con éxito' });
 	}
 
@@ -73,8 +79,6 @@ export async function POST({ request }) {
 	});
 
 	if (!savedBooking) return json({ success: false, message: 'No se ha podido crear la reserva' });
-
-	await addTurnoToUser();
 
 	return json({ success: true, message: 'Reserva creada con éxito', savedBooking });
 }

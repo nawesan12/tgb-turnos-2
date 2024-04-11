@@ -12,18 +12,10 @@
 
 	<footer class="flex flex-col items-center mt-14 gap-3">
 		<a
-			href="/login"
+			href="/turno/client-info"
 			class="text-xl btn-secondary font-medium py-2 px-5 rounded-xl border-2 border-orange-600"
 		>
-			Entrar como cliente
+			Acceder
 		</a>
 	</footer>
 </section>
-<div class="fixed inset-x-0 bottom-0">
-	<div class="bg-orange-600 px-4 py-3 text-white">
-		<p class="text-center text-sm font-medium">
-			Nuevo año?
-			<a href="/login" class="inline-block underline"> Nuevo look </a>
-		</p>
-	</div>
-</div>
