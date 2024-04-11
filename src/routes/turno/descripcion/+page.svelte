@@ -23,7 +23,7 @@
 	</h2>
 
 	<Textarea
-		class="mt-4 shadow-drop-2-center text-black"
+		class="mt-4 shadow-drop-2-center text-white"
 		name="description"
 		id="description"
 		placeholder="Decinos tu preferencia!"
