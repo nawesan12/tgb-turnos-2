@@ -6,5 +6,5 @@ const prisma = new PrismaClient();
 export async function load() {
 	const services = await prisma.service.findMany();
 
-	return { services };
+	return { services: services.sort((a, b) => a.id - b.id) };
 }
