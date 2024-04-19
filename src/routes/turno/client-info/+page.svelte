@@ -26,8 +26,8 @@
 
 <section class="flex justify-center items-center flex-col p-4 h-screen gap-8">
 	<div class="w-full">
-		<Label>Nombre</Label>
-		<Input bind:value={clientName} class="w-full" placeholder="Nombre" />
+		<Label>Nombre y apellido</Label>
+		<Input bind:value={clientName} class="w-full" placeholder="Nombre y apellido" />
 	</div>
 	<div class="w-full">
 		<Label>Email</Label>
