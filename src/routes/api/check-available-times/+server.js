@@ -17,7 +17,7 @@ export async function POST({ request }) {
 	const [day, month] = date.split('/'); // Assuming 'YYYY-MM-DD' format
 
 	let startTime = '11:00';
-	let endTime = '20:00';
+	let endTime = '19:00';
 
 	console.debug(day, month);
 
