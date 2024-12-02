@@ -26,7 +26,7 @@
 
 	<h3 class="m-4 font-semibold text-xl">Año Nuevo 🙌❤</h3>
 	<div class="flex flex-wrap gap-8 justify-center">
-		{#each navidad as date}
+		{#each nuevo as date}
 			<DateItem {date} />
 		{/each}
 	</div>
