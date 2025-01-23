@@ -4,19 +4,10 @@ import { json } from '@sveltejs/kit';
 const prisma = new PrismaClient();
 
 export async function POST({ request }) {
-	const {
-		serviceId,
-		paymentMethod,
-		price,
-		time,
-		date,
-		month,
-		year,
-		description,
-		clientName,
-		clientEmail,
-		clientPhone
-	} = await request.json();
+	const { serviceId, price, time, date, month, year, description, name, email, phone } =
+		await request.json();
+
+	console.log(price);
 
 	const formatDateWithLeadingZeros = () => {
 		const dateWithLeadingZeros = date < 10 ? `0${date}` : date;
@@ -28,53 +19,19 @@ export async function POST({ request }) {
 
 	const newBooking = {
 		serviceId,
-		paymentMethod,
 		price,
 		time,
 		date,
-		year,
 		description,
-		clientName,
-		clientEmail,
-		clientPhone
+		name,
+		email,
+		phone
 	};
 
-	// check if there's already a booking for the same date and time
-	const existingBooking = await prisma.booking.findFirst({
-		where: {
-			date: formattedDate,
-			time
-		}
-	});
-
-	if (existingBooking && existingBooking.status === 'Pendiente')
-		return json({ success: false, message: 'Ya hay una reserva en ese horario' });
-
-	if (existingBooking && existingBooking.status === 'Cancelado') {
-		const updatedBooking = await prisma.booking.update({
-			where: {
-				id: existingBooking.id
-			},
-			data: {
-				...newBooking,
-				date: formattedDate,
-				year: String(year),
-				status: 'Pendiente'
-			}
-		});
-
-		if (!updatedBooking) return json({ success: false });
-
-		return json({ success: true, message: 'Reserva creada con éxito' });
-	}
-
-	const savedBooking = await prisma.booking.create({
+	const savedBooking = await prisma.appointment.create({
 		data: {
 			...newBooking,
-			price: Number(newBooking.price),
-			paymentMethod: '',
-			date: formattedDate,
-			year: String(year)
+			date: new Date(formattedDate)
 		}
 	});
 
