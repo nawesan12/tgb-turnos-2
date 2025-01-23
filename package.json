@@ -50,6 +50,6 @@
 		"tailwind-variants": "^0.2.1"
 	},
 	"engines": {
-    		"node": "18.x"  // or "20.x"
+    		"node": "18.x"
  	}
 }
