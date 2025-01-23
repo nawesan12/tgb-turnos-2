@@ -48,5 +48,8 @@
 		"svelte-sonner": "^0.3.22",
 		"tailwind-merge": "^2.2.2",
 		"tailwind-variants": "^0.2.1"
-	}
+	},
+	"engines": {
+    		"node": "18.x"  // or "20.x"
+ 	}
 }
