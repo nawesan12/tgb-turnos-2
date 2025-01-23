@@ -8,24 +8,23 @@
 	import { toast } from 'svelte-sonner';
 	import Checkbox from '$lib/components/ui/checkbox/checkbox.svelte';
 
-	let clientName;
-	let clientEmail;
-	let clientPhone;
+	let name;
+	let email;
+	let phone;
 
 	let checked;
 
 	function updateUserDataLocally() {
-		if (clientName && clientEmail && clientPhone) {
+		if (name && email && phone) {
 			bookingContext.update((value) => {
-				return { ...value, clientName, clientEmail, clientPhone };
+				return { ...value, name, email, phone };
 			});
 
 			if (checked) {
-				localStorage.setItem(
-					'barber-client-data',
-					JSON.stringify({ clientName, clientEmail, clientPhone })
-				);
+				localStorage.setItem('barber-client-data', JSON.stringify({ name, email, phone }));
 			}
+
+			console.log(name, email, phone);
 
 			goto('/turno');
 			return;
@@ -38,26 +37,26 @@
 		const userAlreadyEntered = localStorage.getItem('barber-client-data');
 		if (userAlreadyEntered) {
 			const userData = JSON.parse(userAlreadyEntered);
-			clientName = userData.clientName;
-			clientEmail = userData.clientEmail;
-			clientPhone = userData.clientPhone;
+			name = userData.name;
+			email = userData.email;
+			phone = userData.phone;
 		}
 		return;
 	});
 </script>
 
 <section class="flex justify-center items-center flex-col p-4 h-screen gap-8">
-	<div class="w-full">
+	<div class="w-full lg:max-w-lg">
 		<Label>Nombre y apellido</Label>
-		<Input bind:value={clientName} class="w-full" placeholder="Nombre y apellido" />
+		<Input bind:value={name} class="w-full" placeholder="Nombre y apellido" />
 	</div>
-	<div class="w-full">
+	<div class="w-full lg:max-w-lg">
 		<Label>Email</Label>
-		<Input bind:value={clientEmail} placeholder="Email" />
+		<Input bind:value={email} placeholder="Email" />
 	</div>
-	<div class="w-full">
+	<div class="w-full lg:max-w-lg">
 		<Label>Telefono</Label>
-		<Input bind:value={clientPhone} placeholder="Telefono" />
+		<Input bind:value={phone} placeholder="Telefono" />
 	</div>
 	<div class="flex items-center space-x-2">
 		<Checkbox id="terms" bind:checked aria-labelledby="terms-label" />

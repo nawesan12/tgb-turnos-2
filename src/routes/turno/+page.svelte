@@ -6,8 +6,8 @@
 
 <GoBack />
 <section class="turno-page">
-	<h2 class="px-4 text-2xl font-semibold">Hola, {$bookingContext.clientName}</h2>
-	<h1 class="text-center text-2xl font-bold mt-8">Volvemos el 15/01/2025! Felices vacaciones.</h1>
+	<h2 class="px-4 text-2xl font-semibold">Hola, {$bookingContext.name}</h2>
+	<ListOfDates />
 </section>
 
 <style>

@@ -3,46 +3,43 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-
-model HolidayService {
-  id    Int    @id @default(autoincrement())
-  name  String
-  type  String
-  price Int    @default(0)
-  image String @default("/barber.svg")
+  provider     = "postgresql"
+  url          = env("DATABASE_URL")
+  directUrl    = env("DIRECT_URL")
+  relationMode = "prisma"
 }
 
 model Service {
-  id      Int       @id @default(autoincrement())
+  id      Int           @id @default(autoincrement())
   name    String
   type    String
-  price   Int       @default(0)
-  image   String    @default("/barber.svg")
-  Booking Booking[]
+  price   Int           @default(0)
+  image   String        @default("/barber.svg")
+  Booking Appointment[]
 }
 
-model Vacations {
-  id  Int    @id @default(autoincrement())
-  day String
+model Appointment {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String
+  date      DateTime
+  time      String
+  serviceId Int      @default(1)
+  service   Service  @relation(fields: [serviceId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@index([serviceId])
 }
 
-model Booking {
-  id            Int      @id @default(autoincrement())
-  date          String
-  time          String
-  year          String?
-  status        String   @default("Pendiente")
-  description   String?  @default("Sin descripción")
-  serviceId     Int
-  service       Service  @relation(fields: [serviceId], references: [id])
-  price         Int
-  paymentMethod String   @default("Efectivo")
-  clientName    String
-  clientEmail   String
-  clientPhone   String
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+model Vacation {
+  id   Int      @id @default(autoincrement())
+  date DateTime @unique
+}
+
+model WorkingHour {
+  id        Int    @id @default(autoincrement())
+  day       String @unique
+  startTime String
+  endTime   String
 }

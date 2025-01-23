@@ -3,9 +3,8 @@ import { writable } from 'svelte/store';
 const initialBooking = {
 	service: '',
 	date: '',
-	time: '',
-	year: new Date().getFullYear(),
 	month: '',
+	time: '',
 	description: '',
 	paymentMethod: 'Efectivo',
 	availableTimes: [],

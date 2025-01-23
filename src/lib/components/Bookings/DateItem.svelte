@@ -39,6 +39,7 @@
 	const fixedDateForProduction = formatDateWithLeadingZeros();
 
 	const getTimesForTurnos = async () => {
+		console.log(fixedDateForProduction);
 		const response = await fetch(`/api/check-available-times`, {
 			method: 'POST',
 			headers: {
