@@ -11,7 +11,7 @@
 	const formatDateWithLeadingZeros = () => {
 		const dateWithLeadingZeros = day < 10 ? `0${day}` : day;
 		const monthWithLeadingZeros = month < 10 ? `0${month}` : month;
-		return `${dateWithLeadingZeros}/${monthWithLeadingZeros}/${year}`;
+		return `${year}-${monthWithLeadingZeros}-${dateWithLeadingZeros}`; // Format: YYYYMMDD
 	};
 
 	let bookingData;
@@ -38,18 +38,27 @@
 
 	const fixedDateForProduction = formatDateWithLeadingZeros();
 
+	console.log(fixedDateForProduction);
+
 	const getTimesForTurnos = async () => {
-		console.log(fixedDateForProduction);
+		console.log(fixedDateForProduction); // Check the formatted date in the logs
 		const response = await fetch(`/api/check-available-times`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ date: fixedDateForProduction })
+			body: JSON.stringify({ date: fixedDateForProduction }) // Send the formatted date
 		});
 		const data = await response.json();
 
-		saveDateLocally(data.times);
+		console.log(data); // Log the response for debugging
+
+		// Ensure data.times is valid before using it
+		if (Array.isArray(data.data.times)) {
+			saveDateLocally(data.data.times);
+		} else {
+			console.error('Invalid times data:', data.times);
+		}
 
 		goto('/turno/horario');
 	};

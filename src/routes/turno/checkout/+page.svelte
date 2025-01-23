@@ -12,9 +12,9 @@
 		<div class="">
 			<h3 class="text-xl font-bold">Tus datos</h3>
 			<section class="p-3">
-				<p><b>Nombre:</b> {$bookingContext.clientName}</p>
-				<p><b>Email:</b> {$bookingContext.clientEmail}</p>
-				<p><b>Numero:</b> {$bookingContext.clientPhone}</p>
+				<p><b>Nombre:</b> {$bookingContext.name}</p>
+				<p><b>Email:</b> {$bookingContext.email}</p>
+				<p><b>Numero:</b> {$bookingContext.phone}</p>
 			</section>
 		</div>
 
@@ -49,7 +49,7 @@
 			<div class="">
 				<section class="p-3 font-semibold text-2xl">
 					<p>Total:</p>
-					<p>${$bookingContext.price}</p>
+					<p>${$bookingContext.price}k</p>
 				</section>
 			</div>
 		</div>
