@@ -19,15 +19,16 @@ model Service {
 }
 
 model Appointment {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String
-  phone     String
-  date      DateTime
-  time      String
-  serviceId Int      @default(1)
-  service   Service  @relation(fields: [serviceId], references: [id])
-  createdAt DateTime @default(now())
+  id          Int      @id @default(autoincrement())
+  name        String
+  email       String
+  phone       String
+  date        DateTime
+  time        String
+  description String?  @default("Sin descripcion")
+  serviceId   Int      @default(1)
+  service     Service  @relation(fields: [serviceId], references: [id])
+  createdAt   DateTime @default(now())
 
   @@index([serviceId])
 }

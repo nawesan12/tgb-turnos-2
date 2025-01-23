@@ -22,10 +22,10 @@
 		toast.success('Turno confirmado! Revisa tu email.');
 
 		const mail = {
-			to_name: dataToSend.clientName,
-			clientEmail: dataToSend.clientEmail,
+			to_name: dataToSend.name,
+			clientEmail: dataToSend.email,
 			service: dataToSend.service,
-			date: String(dataToSend.date + '/' + dataToSend.month + '/' + dataToSend.year),
+			date: String(dataToSend.date + '/' + dataToSend.month + '/' + new Date().getFullYear()),
 			time: dataToSend.time
 		};
 

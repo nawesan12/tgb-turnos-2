@@ -4,22 +4,17 @@ import { json } from '@sveltejs/kit';
 const prisma = new PrismaClient();
 
 export async function POST({ request }) {
-	const { serviceId, price, time, date, month, year, description, name, email, phone } =
-		await request.json();
-
-	console.log(price);
+	const { time, date, month, year, description, name, email, phone } = await request.json();
 
 	const formatDateWithLeadingZeros = () => {
 		const dateWithLeadingZeros = date < 10 ? `0${date}` : date;
 		const monthWithLeadingZeros = month < 10 ? `0${month}` : month;
-		return `${dateWithLeadingZeros}/${monthWithLeadingZeros}/${year}`;
+		return `${year}/${monthWithLeadingZeros}/${dateWithLeadingZeros}`;
 	};
 
 	const formattedDate = formatDateWithLeadingZeros();
 
 	const newBooking = {
-		serviceId,
-		price,
 		time,
 		date,
 		description,

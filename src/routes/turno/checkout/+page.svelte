@@ -59,9 +59,9 @@
 
 	<ConfirmBooking
 		dataToSend={{
-			clientEmail: $bookingContext.email,
-			clientPhone: $bookingContext.phone,
-			clientName: $bookingContext.name,
+			email: $bookingContext.email,
+			phone: $bookingContext.phone,
+			name: $bookingContext.name,
 			service: $bookingContext.service,
 			price: $bookingContext.price,
 			time: $bookingContext.time,
