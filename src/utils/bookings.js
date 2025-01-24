@@ -23,32 +23,31 @@ export const generateAvailableTimesAndDateFromDB = async (
 		},
 	});
 
-	// Create a Set of booked times for quick lookup
+	// Normalize booked times for consistent comparison
 	const bookedTimes = new Set(
-		bookings.map((booking) => booking.time.trim()) // Ensure consistent formatting
+		bookings.map((booking) => booking.time.trim().padStart(5, '0')) // Ensure "HH:MM" format
 	);
 
 	// Generate all times within the range (assuming hour-based intervals)
 	for (let i = startHour; i < endHour; i++) {
 		const time = `${i.toString().padStart(2, '0')}:00`;
 
-		// Add to available times if not already booked
+		// Exclude booked times from available times
 		if (!bookedTimes.has(time)) {
 			available.times.push(time);
 		}
 	}
 
-	// Check if the date is a vacation day and restrict available times accordingly
+	// Handle vacation days: Restrict times within the vacation constraints
 	if (vacationDays.includes(date) && available.times.length) {
 		const initPoint = available.times.indexOf(initHour);
 		const finishPoint = available.times.indexOf(finishHour);
 
-		// If either boundary is invalid, return an empty list of times
+		// If boundaries are invalid, return no available times
 		if (initPoint === -1 || finishPoint === -1) {
 			return { ...available, times: [] };
 		}
 
-		// Slice the times to fit within the vacation constraints
 		return {
 			...available,
 			times: available.times.slice(initPoint, finishPoint + 1),
