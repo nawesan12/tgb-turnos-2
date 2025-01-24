@@ -9,7 +9,7 @@ export const generateAvailableTimesAndDateFromDB = async (
 ) => {
 	const available = {
 		date: date,
-		times: []
+		times: [],
 	};
 
 	// Convert initHour and finishHour to numeric values for the range (only hours, ignoring minutes)
@@ -19,25 +19,27 @@ export const generateAvailableTimesAndDateFromDB = async (
 	// Fetch bookings for the given date
 	const bookings = await prisma.appointment.findMany({
 		where: {
-			date: new Date(date)
-		}
+			date: new Date(date),
+		},
 	});
 
-	// Create a map of booked times for quick lookup (no filtering by status)
-	const bookedTimes = new Set(bookings.map((booking) => booking.time));
+	// Create a Set of booked times for quick lookup
+	const bookedTimes = new Set(
+		bookings.map((booking) => booking.time.trim()) // Ensure consistent formatting
+	);
 
 	// Generate all times within the range (assuming hour-based intervals)
 	for (let i = startHour; i < endHour; i++) {
 		const time = `${i.toString().padStart(2, '0')}:00`;
 
-		// Check if the time is not booked
+		// Add to available times if not already booked
 		if (!bookedTimes.has(time)) {
 			available.times.push(time);
 		}
 	}
 
-	// Check if the date is a vacation day and apply slicing to restrict available times
-	if (vacationDays.includes(available.date) && available.times.length) {
+	// Check if the date is a vacation day and restrict available times accordingly
+	if (vacationDays.includes(date) && available.times.length) {
 		const initPoint = available.times.indexOf(initHour);
 		const finishPoint = available.times.indexOf(finishHour);
 
@@ -49,9 +51,10 @@ export const generateAvailableTimesAndDateFromDB = async (
 		// Slice the times to fit within the vacation constraints
 		return {
 			...available,
-			times: available.times.slice(initPoint, finishPoint + 1)
+			times: available.times.slice(initPoint, finishPoint + 1),
 		};
 	}
 
 	return available;
 };
+
