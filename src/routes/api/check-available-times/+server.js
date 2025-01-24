@@ -15,9 +15,12 @@ export async function POST({ request }) {
 		const vacationDays = await prisma.vacation.findMany();
 		const vacations = vacationDays.map((vacation) => vacation.date.toISOString().split('T')[0]);
 
+		const parsedDate = new Date(`${date}T00:00:00`);
 		const workingHour = await prisma.workingHour.findUnique({
-			where: { day: new Date(date).toLocaleString('en-US', { weekday: 'long' }) }
+			where: { day: parsedDate.toLocaleString('en-US', { weekday: 'long' }) }
 		});
+
+		console.log(parsedDate.toLocaleString('en-US', { weekday: 'long' }));
 
 		if (!workingHour) {
 			return json({ message: 'No working hours available for the requested day' }, { status: 404 });

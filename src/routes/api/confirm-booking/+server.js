@@ -4,12 +4,14 @@ import { json } from '@sveltejs/kit';
 const prisma = new PrismaClient();
 
 export async function POST({ request }) {
-	const { time, date, month, year, description, name, email, phone } = await request.json();
+	const { time, date, month, description, name, email, phone } = await request.json();
+
+	console.log({ time, date, month, description, name, email, phone });
 
 	const formatDateWithLeadingZeros = () => {
 		const dateWithLeadingZeros = date < 10 ? `0${date}` : date;
 		const monthWithLeadingZeros = month < 10 ? `0${month}` : month;
-		return `${year}/${monthWithLeadingZeros}/${dateWithLeadingZeros}`;
+		return `${new Date().getFullYear()}/${monthWithLeadingZeros}/${dateWithLeadingZeros}`;
 	};
 
 	const formattedDate = formatDateWithLeadingZeros();
