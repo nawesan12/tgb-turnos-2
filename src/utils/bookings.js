@@ -24,17 +24,17 @@ export const generateAvailableTimesAndDateFromDB = async (
 			},
 		});
 
-		// Normalize booked times for consistent comparison
-		const bookedTimes = new Set(
-			bookings.map((booking) => booking.time.trim().padStart(5, '0')) // Format as "HH:MM"
+		// Extract booked times into an array
+		const bookedTimes = bookings.map((booking) =>
+			booking.time.trim().padStart(5, '0') // Ensure uniform formatting
 		);
 
 		// Generate available times within the range
 		for (let i = startHour; i < endHour; i++) {
 			const time = `${i.toString().padStart(2, '0')}:00`; // Generate time in "HH:MM" format
 
-			// Only include times not in bookedTimes
-			if (!bookedTimes.has(time)) {
+			// Check if time is not booked
+			if (!bookedTimes.includes(time)) {
 				available.times.push(time);
 			}
 		}
@@ -61,3 +61,4 @@ export const generateAvailableTimesAndDateFromDB = async (
 		throw new Error('Failed to generate available times. Please check the logs.');
 	}
 };
+
