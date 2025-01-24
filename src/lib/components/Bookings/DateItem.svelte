@@ -30,8 +30,7 @@
 				...bookingData,
 				date: date.day,
 				year: new Date().getFullYear(),
-				month: date.month,
-				availableTimes: [...availableTimes]
+				month: date.month
 			})
 		);
 	}
