@@ -27,7 +27,7 @@ export const generateAvailableTimesAndDateFromDB = async (
 	const bookedTimes = new Set(bookings.map((booking) => booking.time));
 
 	// Generate all times within the range (assuming hour-based intervals)
-	for (let i = startHour; i <= endHour; i++) {
+	for (let i = startHour; i < endHour; i++) {
 		const time = `${i.toString().padStart(2, '0')}:00`;
 
 		// Check if the time is not booked

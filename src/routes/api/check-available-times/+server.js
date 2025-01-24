@@ -25,6 +25,8 @@ export async function POST({ request }) {
 
 		const { startTime, endTime } = workingHour;
 
+		console.log(startTime, endTime);
+
 		const availableTimes = await generateAvailableTimesAndDateFromDB(
 			date,
 			vacations,
